@@ -10,27 +10,46 @@ import (
 )
 
 type Node struct {
-	Val int
+	Val  int
 	Next *Node
 }
+
 func main() {
 
-	second := &Node{1, nil}
-	first := &Node{0,second}
-	third := first
-	second.Val = 10
+	//deleteWhileIter()
+	//deleteWhileIter2()
+	//deleteWhileIter3()
+	//deleteWhileIter4()
+	//test()
+	forRange()
 
-	fmt.Println(third.Next.Val)
+	//second := &Node{1, nil}
+	//first := &Node{0,second}
+	//third := first
+	//second.Val = 10
+	//
+	//fmt.Println(third.Next.Val)
 
 	//sortInReverseOrder()
 	//fmt.Print(string(97) + "#")
 	//typeConvert()
 	//arrayOfDigToString()
-	sliceToArray()
-	fib := fibonacciGenerator()
-	fmt.Println("first fibo:",fib())
-	fmt.Println("second fibo:",fib())
-	fmt.Println("third fibo:",fib())
+	//sliceToArray()
+	//fib := fibonacciGenerator()
+	//fmt.Println("first fibo:",fib())
+	//fmt.Println("second fibo:",fib())
+	//fmt.Println("third fibo:",fib())
+	//
+	//i:=10
+	//var i1 interface{}
+	//i1 = i
+	//switch j := i1.(type) {
+	//case int :
+	//	fmt.Println("type int, val :", j)
+	//default:
+	//	fmt.Println("no iead what type it is")
+	//
+	//}
 }
 
 // 倒序排序
@@ -73,7 +92,6 @@ func typeConvert() {
 	// 3. type conversion
 	// 4. 调节
 
-
 	// convert between int8 int16 int int32 int64
 	// convert between float32 float64
 
@@ -87,18 +105,17 @@ func sliceAppend() {
 
 }
 
+func arrayOfDigToString() {
+	iarr := []int{1, 2, 3, 4}
+	fmt.Println(strings.Trim(strings.Replace(fmt.Sprint(iarr), " ", "", -1), "[]"))
 
-func arrayOfDigToString()  {
-	iarr := []int {1,2,3,4,}
-	fmt.Println(strings.Trim(strings.Replace(fmt.Sprint(iarr),  " ", "", -1), "[]"))
-
-	farr := []float32 {1.0,2.0,3.0,4.0,}
-	fmt.Println(strings.Trim(strings.Replace(fmt.Sprint(farr),  " ", "", -1), "[]"))
+	farr := []float32{1.0, 2.0, 3.0, 4.0}
+	fmt.Println(strings.Trim(strings.Replace(fmt.Sprint(farr), " ", "", -1), "[]"))
 
 	// write reduce function
 }
 
-func sliceToArray()  {
+func sliceToArray() {
 	var x []int
 	for i := 0; i < 100; i++ {
 		x = append(x, i)
@@ -120,9 +137,123 @@ func fibonacciGenerator() func() int {
 	}
 }
 
+func deleteWhileIter() {
+	src := []int{1, 2, 3, 4, 5, 6, 7}
+	for i, v := range src {
+		fmt.Print(v, " ")
+		if v == 4 {
+			src = append(src[:i], src[i+1:]...)
+		}
+	}
+	fmt.Println()
+	fmt.Println("cap:", len(src))
+}
+func deleteWhileIter4() {
+	src := [...]int{1, 2, 3, 4, 5, 6, 7}
+	for k, v := range src {
+		fmt.Printf("k, v pointer of src is :%p\n", &src)
+		fmt.Print(k, v)
+	}
+
+	fmt.Printf("origin pointer :%p", &src)
+	fmt.Println()
+	fmt.Println("cap:", len(src))
+}
+
+func deleteWhileIter2() {
+	src := map[string]string{"name": "sennalu", "age": "20", "salary": "100"}
+	for k, v := range src {
+		fmt.Print(" k=", k, " v=", v)
+		if k == "age" {
+			delete(src, k)
+		}
+	}
+	fmt.Println()
+	fmt.Println("cap:", len(src))
+}
+
+/**
+删除元素的正确做法
+*/
+func deleteWhileIter3() {
+	src := []int{1, 2, 3, 4, 4, 6, 7}
+	i := 0
+	for {
+		if i >= len(src) {
+			break
+		}
+
+		if src[i] != 4 {
+			i++
+			continue
+		}
+
+		src = append(src[:i], src[i+1:]...)
+
+	}
+	fmt.Println(src)
+	fmt.Println("cap:", len(src))
+}
+
+func test() {
+	src := []int{1,2,3,4}
+
+	for i, j := 0, len(src); i < 4; i++ {
+		if i < len(src) && src[i] == 2 {
+			src = append(src[:i], src[i+1:]...)
+		}
+		fmt.Println("j=", j)
+	}
+}
+
+/**
+考点 for range 循环, 值专递， 本身，还是拷贝
+ */
+func forRange()  {
+	src :=[...]int {1,2,3,4,5,6}
+	src2 :=[...]int {1,2,3,4,5,6}
+	src3 :=[]int {1,2,3,4,5,6}
+	tmp := []int{}
+	tmp2 := []int{}
+	tmp3 := []int{}
+	for k, v :=range src {
+		if k == 0{
+			src[1] = 22
+			src[2] = 33
+		}
+		tmp= append(tmp, v)
+	}
+	fmt.Println("fix-length array for range example ")
+	fmt.Println("original array ")
+	fmt.Println(src)
+	fmt.Println(tmp)
+
+	for k, v :=range src2[:] {
+		if k == 0{
+			src2[1] = 22
+			src2[2] = 33
+		}
+		tmp2= append(tmp2, v)
+	}
+	fmt.Println("slice for range example, map is the same")
+	fmt.Println("original array ")
+	fmt.Println(src2)
+	fmt.Println(tmp2)
+
+	for k, v :=range src3 {
+		if k == 0{
+			src3[1] = 22
+			src3[2] = 33
+		}
+		tmp3= append(tmp3, v)
+	}
+	fmt.Println("slice for range example, map is the same")
+	fmt.Println("original array ")
+	fmt.Println(src3)
+	fmt.Println(tmp3)
+}
+
+
 // 闭包可以包含逻辑 -- 可以和 interface 结合上
 // middleware  http.HandleFunc("/hello", hello)
 // func hello(w http.ResponseWriter, r *http.Request) {
-
-
-
