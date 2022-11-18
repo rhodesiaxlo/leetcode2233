@@ -109,7 +109,7 @@ func LeetCode29divide(dividend int, divisor int) int {
 }
 
 /**
-dp 解法
+00056_merge_interval 解法
 */
 func div(dived int, d int) int {
 	symbol := 1

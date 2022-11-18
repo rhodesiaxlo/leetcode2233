@@ -44,3 +44,13 @@ func IsSorted(nums []int) bool {
 
 	return true
 }
+
+func GenArrWithSmallRange(n, m int) []int {
+	nums := make([]int, n)
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+	for i:=0;i < n;i++ {
+		nums[i] = r.Intn(m)
+	}
+	return nums
+}

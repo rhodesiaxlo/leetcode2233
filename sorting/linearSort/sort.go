@@ -14,6 +14,7 @@ func BubbleSort(nums []int) {
 	}
 }
 
+// 为什么选择排序是不稳定的， 因为如果后面有更小的话， 会掉个
 func SelectionSort(nums []int) {
 	sz := len(nums)
 	for i := 0; i < sz-1; i++ {
@@ -118,12 +119,29 @@ func __merge(nums []int, l, m, r int) {
 	}
 }
 
+/**
+
+ */
+func MergeSortBU()  {
+	// todo...
+}
+
+func QuickSortLLPtr()  {
+	// todo...
+}
+
+func QuickSortLRPtr()  {
+	// todo..
+}
+
+
 func QuickSort(nums []int) {
 	__quickSort(nums, 0, len(nums)-1)
 }
 
 func __quickSort(nums []int, l, r int) {
-	if l >= r {
+	if r-l <= 15 {
+		__insertSort2(nums, l, r)
 		return
 	}
 
@@ -137,17 +155,85 @@ func __quickSort(nums []int, l, r int) {
 
 func __partition(nums []int, l, r int) int {
 	j := l
-	tmp:= nums[l]
+	tmp := nums[l]
 	// 约定 (-infi, j) 的元素都小于 tmp
 	// 遍历数组, 如果发现有比 tmp 下的 放到 j 的位置 j++
-	for i := l+1; i <= r; i++ {
+	for i := l + 1; i <= r; i++ {
 		if nums[i] < tmp {
 			nums[j] = nums[i]
 			j++
 		}
 	}
 
-	nums[j]= tmp
+	nums[j] = tmp
 
 	return j
+}
+
+/**
+有一个缺点就是如果有大量重复元素的话，会浪费性能所有产生了三路快排
+*/
+func QuickSortThreeWays() {
+	// todo..
+}
+
+// a lot of same values
+func CountingSort(nums []int)  {
+
+}
+
+func __countingSort(nums []int, biggest, smallest int)  {
+
+}
+
+
+func RadixSortLSD(nums []int)  {
+	// todo...
+}
+
+func RadixSortMSD(nums []int)  {
+	// todo..
+}
+
+// val is dense dis
+// len(n) ≈ largest - smallest
+func PigeonholdSort(nums []int)  {
+	// todo.
+}
+
+func BucketSort(nums []int)  {
+	// todo..
+}
+
+func StdSort(nums []int)  {
+	// todo
+}
+
+func StdStableSort(nums []int)  {
+	// todo
+}
+
+func ShellSort(nums []int)  {
+	// todo
+}
+
+func CocktailShakerSort(nums []int)  {
+	// todo..
+}
+
+func GnomeSort(nums []int) {
+	// todo
+}
+
+func BitonicSort(nums []int)  {
+	// todo...
+}
+
+func BogoSort(nums []int)  {
+	
+}
+
+// cocktail shaker sort && optimized bubble sort
+func ExchangeSort()  {
+	// todo..
 }

@@ -5,6 +5,8 @@ import (
 	"leetcode/leetcode/algo"
 	"leetcode/leetcode/sorting"
 	"leetcode/leetcode/sorting/linearSort"
+	"leetcode/leetcode/structure"
+	"leetcode/leetcode/structure/heap"
 	"leetcode/leetcode/structure/list"
 	"math/bits"
 	"math/rand"
@@ -27,11 +29,32 @@ type Node struct {
 
 
 func main() {
+	nums := sorting.GenArray(10,0)
+	mh := heap.MaxHeap{}
+	mh.Heapify(nums)
+	linearSort.QuickSort(nums)
+	max := nums[len(nums)-1]
+	fmt.Println(max)
+	return
+
+	heapArr := []int{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17}
+	structure.PrintComTree(heapArr)
+	//fmt.Println(arr)
+	return
+
+	str := make([]string, 3)
+	fmt.Println(str)
+	return
+
+	a := [][2]int{{1,2},{3,4},{5,6}}
+
+	fmt.Println(a)
+	return
 	nums2 := sorting.GenArrayDesc(10)
 	linearSort.InsertSort(nums2)
 	fmt.Println(nums2)
 	return
-	nums := sorting.GenArrayDesc(10)
+	//nums := sorting.GenArrayDesc(10)
 	linearSort.MergeSort(nums)
 	return
 	s1 := rand.NewSource(10)

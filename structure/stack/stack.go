@@ -1,5 +1,10 @@
 package stack
-
+// basic operation
+// top
+// push
+// pop
+// size
+// empty
 type Stack struct {
 	a []rune
 }

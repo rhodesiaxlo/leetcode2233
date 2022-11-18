@@ -7,7 +7,7 @@ func main() {
 }
 
 /**
-dp 案例
+00056_merge_interval 案例
 */
 func isMath(s string, p string) bool {
 	szs, szp := len(s), len(p)
