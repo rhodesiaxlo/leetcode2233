@@ -1,0 +1,153 @@
+package linearSort
+
+/*
+升序排列
+*/
+func BubbleSort(nums []int) {
+	sz := len(nums)
+	for i := 0; i < sz-1; i++ {
+		for j := 0; j < sz-i-1; j++ { // 还要判定 j+1, 所以 j < sz -i - 1
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+			}
+		}
+	}
+}
+
+func SelectionSort(nums []int) {
+	sz := len(nums)
+	for i := 0; i < sz-1; i++ {
+		minIndex := i
+		for j := i + 1; j < sz; j++ {
+			if nums[j] < nums[minIndex] {
+				minIndex = j
+			}
+		}
+		if minIndex != i {
+			nums[i], nums[minIndex] = nums[minIndex], nums[i]
+		}
+	}
+}
+
+/**
+插入排序比选择排序改进的点在于， 在近乎有序的数组中接近O(n)
+在无需的数组中也比选择排序好
+*/
+func InsertSort(nums []int) {
+	l, r := 0, len(nums)-1
+	__insertSort(nums, l, r)
+}
+
+func __insertSort(nums []int, l, r int) {
+	for i := l + 1; i <= r; i++ {
+		for j := i; j > l && nums[j] < nums[j-1]; j-- {
+			nums[j-1], nums[j] = nums[j], nums[j-1]
+		}
+	}
+}
+
+func __insertSort2(nums []int, l, r int) {
+	for i := l + 1; i <= r; i++ {
+		tmp := nums[i]
+		j := i
+		for j = i; j > l && nums[j] < tmp; j-- {
+			nums[j] = nums[j-1]
+		}
+		// 找到第一个
+		nums[j] = tmp
+	}
+}
+
+/**
+归并排序
+*/
+func MergeSort(nums []int) {
+	__mergeSort(nums, 0, len(nums)-1)
+}
+
+/**
+nums 待排序数组， l, 左边界  m 中间点 r 右边界
+*/
+func __mergeSort(nums []int, l, r int) {
+	if l >= r {
+		return
+	}
+
+	//if r-l <= 15 {
+	//	InsertSort2(nums, l, r)
+	//	return
+	//}
+
+	mid := (r-l)/2 + l
+	__mergeSort(nums, l, mid)
+	__mergeSort(nums, mid+1, r)
+	__merge(nums, l, mid, r)
+
+	//if nums[mid] > nums[mid+1] {
+	//	__merge(nums, l, mid, r)
+	//}
+}
+
+func __merge(nums []int, l, m, r int) {
+	aux := make([]int, r-l+1)
+
+	for i := l; i <= r; i++ {
+		aux[i-l] = nums[i]
+	}
+
+	i, j, k := l, m+1, l
+	// use aux to sort
+	for {
+		if i > m && j > r {
+			break
+		}
+		if i > m {
+			nums[k] = aux[j-l]
+			j++
+		} else if j > r {
+			nums[k] = aux[i-l]
+			i++
+		} else if aux[i-l] < aux[j-l] {
+			nums[k] = aux[i-l]
+			i++
+		} else {
+			nums[k] = aux[j-l]
+			j++
+		}
+		k++
+	}
+}
+
+func QuickSort(nums []int) {
+	__quickSort(nums, 0, len(nums)-1)
+}
+
+func __quickSort(nums []int, l, r int) {
+	if l >= r {
+		return
+	}
+
+	// partition
+	p := __partition(nums, l, r)
+
+	// quick sort
+	__quickSort(nums, l, p-1)
+	__quickSort(nums, p+1, r)
+}
+
+func __partition(nums []int, l, r int) int {
+	j := l
+	tmp:= nums[l]
+	// 约定 (-infi, j) 的元素都小于 tmp
+	// 遍历数组, 如果发现有比 tmp 下的 放到 j 的位置 j++
+	for i := l+1; i <= r; i++ {
+		if nums[i] < tmp {
+			nums[j] = nums[i]
+			j++
+		}
+	}
+
+	nums[j]= tmp
+
+	return j
+}

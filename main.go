@@ -2,7 +2,12 @@ package main
 
 import (
 	"fmt"
+	"leetcode/leetcode/algo"
+	"leetcode/leetcode/sorting"
+	"leetcode/leetcode/sorting/linearSort"
+	"leetcode/leetcode/structure/list"
 	"math/bits"
+	"math/rand"
 	"reflect"
 	"sort"
 	"strconv"
@@ -20,7 +25,98 @@ type Node struct {
 	Next *Node
 }
 
+
 func main() {
+	nums2 := sorting.GenArrayDesc(10)
+	linearSort.InsertSort(nums2)
+	fmt.Println(nums2)
+	return
+	nums := sorting.GenArrayDesc(10)
+	linearSort.MergeSort(nums)
+	return
+	s1 := rand.NewSource(10)
+	r1 := rand.New(s1)
+	fmt.Println(r1.Intn(100))
+	fmt.Println(r1.Intn(100))
+	fmt.Println(r1.Intn(100))
+	fmt.Println(r1.Intn(100))
+	fmt.Println(r1.Float64())
+	fmt.Println(r1.Float64())
+	fmt.Println(r1.Float64())
+	fmt.Println("random:", r1.Int())
+	fmt.Println("random:", r1.Int())
+	fmt.Println("-------------------  same source, same random number")
+	s2 := rand.NewSource(10)
+	r2 := rand.New(s2)
+	fmt.Println(r2.Intn(100))
+	fmt.Println(r2.Intn(100))
+	fmt.Println(r2.Intn(100))
+	fmt.Println(r2.Intn(100))
+	fmt.Println(r2.Float64())
+	fmt.Println(r2.Float64())
+	fmt.Println(r2.Float64())
+	fmt.Println("random:", r1.Int())
+	fmt.Println("random:", r1.Int())
+
+	return
+
+	fmt.Println(rand.Intn(100))
+	fmt.Println(rand.Intn(100))
+	fmt.Println(rand.Intn(100))
+	return
+	//s := "abca"
+	//fmt.Print(s[1:2]))
+	x := []string{"a","b","c"}
+	fmt.Println(reflect.TypeOf(x[:1]))
+	return
+	i:=0
+	fmt.Scanf("%d", &i)
+	fmt.Print("you have input ", i)
+	//r := bufio.NewReader(os.Stdin)
+	//s, _, err := r.ReadLine()
+	//if err != nil {
+	//	fmt.Println("input error")
+	//}
+	//
+	//cnt := 0
+	//for i:= len(s)-1;i >= 0 ;i-- {
+	//	if s[i] == ' ' {
+	//		break
+	//	}
+	//	cnt++
+	//}
+	//fmt.Print(cnt)
+}
+
+func main1() {
+	algo.LeetCode32longestValidParentheses("))(()()))()()()()")
+	algo.LeetCode28IndexOfStr("leetcode", "leeto")
+	n1 := &list.ListNode{
+		Val:  0,
+		Next: nil,
+	}
+	n2 := &list.ListNode{
+		Val:  1,
+		Next: nil,
+	}
+	n1.Next = n2
+	n3 := &list.ListNode{
+		Val:  3,
+		Next: nil,
+	}
+	n2.Next = n3
+
+
+	//fmt.Println(algo.LeetCode876MiddleOfLinkList(&list.ListNode{}))
+
+
+	for i := 3; forCond(i);i-- {
+
+	}
+
+	fmt.Println(algo.LeetCode29divide(10, 3))
+
+
 	//fmt.Println("prime number ", countPrime(3))
 	//eratosthenesSieve(3)
 	fmt.Println(SieveOfEratosthenes(2))
@@ -59,6 +155,26 @@ func main() {
 	//	fmt.Println("no iead what type it is")
 	//
 	//}
+}
+
+func leetcode876()  {
+	n1 := &list.ListNode{
+		Val:  0,
+		Next: nil,
+	}
+	n2 := &list.ListNode{
+		Val:  1,
+		Next: nil,
+	}
+	n1.Next = n2
+	n3 := &list.ListNode{
+		Val:  3,
+		Next: nil,
+	}
+	n2.Next = n3
+
+
+	fmt.Println(algo.LeetCode876MiddleOfLinkList(&list.ListNode{}))
 }
 
 // 倒序排序
@@ -355,5 +471,10 @@ func SieveOfEratosthenes(n int) []int {
 }
 
 func evalOrder()  {
-	i
+
+}
+
+func forCond(n int) bool {
+	fmt.Println(n)
+	return n > 0
 }
