@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"leetcode/leetcode/algo"
 	"leetcode/leetcode/sorting"
@@ -8,9 +9,12 @@ import (
 	"leetcode/leetcode/structure"
 	"leetcode/leetcode/structure/heap"
 	"leetcode/leetcode/structure/list"
+	"leetcode/leetcode/structure/tree"
 	"math/bits"
 	"math/rand"
+	"os"
 	"reflect"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -27,22 +31,52 @@ type Node struct {
 	Next *Node
 }
 
-
 func main() {
-	nums1 := []int {1,2,3,4,5}
+	bst := tree.NewBst()
+	file, err := os.Open("./bible3.txt")
+	if err != nil {
+		fmt.Println("opps , we have a problem", err.Error())
+		return
+	}
+	defer file.Close()
+
+	scan := bufio.NewScanner(file)
+	scan.Split(bufio.ScanWords)
+	total := 0
+	for scan.Scan() {
+		total++
+		tmpWord := scan.Text()
+		tmpWord1 := strings.ToLower(tmpWord)
+		compile, _ := regexp.Compile("[^a-zA-Z0-9 ]+")
+		tmpWord1 = string(compile.ReplaceAll([]byte(tmpWord1), []byte("")))
+		e := bst.Search(tmpWord1)
+		if e != nil {
+			e.V++
+		} else {
+			bst.Insert(tmpWord1, 1)
+		}
+	}
+	file.Close()
+	god := bst.Search("god")
+
+
+	fmt.Print("god number", god.V, "total ", total, " bst total ", bst.Agg())
+	return
+
+	nums1 := []int{1, 2, 3, 4, 5}
 	changeVal(nums1)
-	nums3 := []int {1,2,3,4,5} // !!! replace
+	nums3 := []int{1, 2, 3, 4, 5} // !!! replace
 	changeValByAssign(nums3)
 
 	fmt.Println("nums1", nums1)
 	fmt.Println("nums3", nums3)
 	return
 
-	arr := []int {1,2,3,4,5,6}
+	arr := []int{1, 2, 3, 4, 5, 6}
 	arr2 := arr[:3]
 	fmt.Println(len(arr2))
 	return
-	nums := sorting.GenArray(10,0)
+	nums := sorting.GenArray(10, 0)
 	mh := heap.MaxHeap{}
 	mh.Heapify(nums)
 	linearSort.QuickSort(nums)
@@ -50,7 +84,7 @@ func main() {
 	fmt.Println(max)
 	return
 
-	heapArr := []int{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17}
+	heapArr := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
 	structure.PrintComTree(heapArr)
 	//fmt.Println(arr)
 	return
@@ -59,7 +93,7 @@ func main() {
 	fmt.Println(str)
 	return
 
-	a := [][2]int{{1,2},{3,4},{5,6}}
+	a := [][2]int{{1, 2}, {3, 4}, {5, 6}}
 
 	fmt.Println(a)
 	return
@@ -102,10 +136,10 @@ func main() {
 	return
 	//s := "abca"
 	//fmt.Print(s[1:2]))
-	x := []string{"a","b","c"}
+	x := []string{"a", "b", "c"}
 	fmt.Println(reflect.TypeOf(x[:1]))
 	return
-	i:=0
+	i := 0
 	fmt.Scanf("%d", &i)
 	fmt.Print("you have input ", i)
 	//r := bufio.NewReader(os.Stdin)
@@ -142,16 +176,13 @@ func main1() {
 	}
 	n2.Next = n3
 
-
 	//fmt.Println(algo.LeetCode876MiddleOfLinkList(&list.ListNode{}))
 
-
-	for i := 3; forCond(i);i-- {
+	for i := 3; forCond(i); i-- {
 
 	}
 
 	fmt.Println(algo.LeetCode29divide(10, 3))
-
 
 	//fmt.Println("prime number ", countPrime(3))
 	//eratosthenesSieve(3)
@@ -193,7 +224,7 @@ func main1() {
 	//}
 }
 
-func leetcode876()  {
+func leetcode876() {
 	n1 := &list.ListNode{
 		Val:  0,
 		Next: nil,
@@ -208,7 +239,6 @@ func leetcode876()  {
 		Next: nil,
 	}
 	n2.Next = n3
-
 
 	fmt.Println(algo.LeetCode876MiddleOfLinkList(&list.ListNode{}))
 }
@@ -506,7 +536,7 @@ func SieveOfEratosthenes(n int) []int {
 	return primes
 }
 
-func evalOrder()  {
+func evalOrder() {
 
 }
 
@@ -515,11 +545,11 @@ func forCond(n int) bool {
 	return n > 0
 }
 
-func changeVal(nums []int)  {
+func changeVal(nums []int) {
 	nums[0] = 1000
 }
 
-func changeValByAssign(nums []int)  {
+func changeValByAssign(nums []int) {
 	nums1 := make([]int, len(nums))
 	copy(nums1, nums)
 	nums = nums1 // replace

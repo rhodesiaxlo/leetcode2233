@@ -2,6 +2,7 @@ package structure
 
 import (
 	"fmt"
+	"leetcode/leetcode/structure/tree"
 	"math"
 	"strconv"
 	"strings"
@@ -56,4 +57,8 @@ func _div(nums []int, level int) ([][]string, int) {
 		j += eleWidth + 1 // 这个语法有点意思
 	}
 	return arr, maxWidth
+}
+
+func PrintBst(b tree.Bst)  {
+
 }
