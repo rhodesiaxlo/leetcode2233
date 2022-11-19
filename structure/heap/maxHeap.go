@@ -34,6 +34,9 @@ import (
 // 5. extractMin / extractMax  displace / inplace
 // 6. print
 
+// 可以回答什么问题
+// 1. 最大的元素是几
+// 2. 大量元素n中, 前 m 名是多少
 type MaxHeap struct {
 	arr    []int
 	eleNum int

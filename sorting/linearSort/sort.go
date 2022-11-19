@@ -5,9 +5,11 @@ import (
 )
 
 // 排序的几个维度
-// 1. stable
-// 2. 时间复杂度
+// 1. stable // 可以多次拍， 比如成绩倒序， 然后名字的字典序
+// 2. 时间复杂度  最好， 最差， 平均
 // 3. inplace
+// 4. 是不是一定要先有序 heap
+// 5. 额外的空间 和 3 有点类似， 但是是定量分析
 
 /*
 升序排列
@@ -143,6 +145,7 @@ func QuickSortLRPtr() {
 	// todo..
 }
 
+// 如何理解快排是一种不稳定的排序方式
 func QuickSort(nums []int) {
 	__quickSort(nums, 0, len(nums)-1)
 }
@@ -166,6 +169,8 @@ func __partition(nums []int, l, r int) int {
 	tmp := nums[l]
 	// 约定 (-infi, j) 的元素都小于 tmp
 	// 遍历数组, 如果发现有比 tmp 下的 放到 j 的位置 j++
+	// 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
+	//swap( nums[l] , nums[rand()%(r-l+1)+l] );
 	for i := l + 1; i <= r; i++ {
 		if nums[i] < tmp {
 			nums[j] = nums[i]
