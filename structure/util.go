@@ -59,6 +59,6 @@ func _div(nums []int, level int) ([][]string, int) {
 	return arr, maxWidth
 }
 
-func PrintBst(b tree.Bst)  {
-
+func PrintNonCompleteTree(node *tree.BstNode) {
+	// todo ..
 }

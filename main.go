@@ -32,6 +32,24 @@ type Node struct {
 }
 
 func main() {
+	bst3 := tree.NewBst()
+	bst3.Insert("20", 20)
+	bst3.Insert("10", 10)
+	bst3.Insert("30", 30)
+	bst3.Insert("5", 5)
+	bst3.Insert("15", 15)
+	bst3.Insert("100", 100)
+	bst3.LevelOrder()
+	return
+	// 20 10 30 15 5 100
+	bst2 := tree.NewBst()
+	for i:=0;i < 10;i++ {
+		tmpV := rand.Intn(10000)
+		bst2.Insert(strconv.Itoa(tmpV), tmpV)
+	}
+	bst2.InOrder()
+	return
+
 	bst := tree.NewBst()
 	file, err := os.Open("./bible3.txt")
 	if err != nil {
@@ -159,6 +177,14 @@ func main() {
 }
 
 func main1() {
+	bst2 := tree.NewBst()
+	for i:=0;i < 10;i++ {
+		tmpV := rand.Intn(10000)
+		bst2.Insert(strconv.Itoa(tmpV), tmpV)
+	}
+	bst2.InOrder()
+	return
+
 	algo.LeetCode32longestValidParentheses("))(()()))()()()()")
 	algo.LeetCode28IndexOfStr("leetcode", "leeto")
 	n1 := &list.ListNode{
