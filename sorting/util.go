@@ -1,7 +1,6 @@
 package sorting
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -37,7 +36,21 @@ func IsSorted(nums []int) bool {
 
 	for i := 0; i < sz-1; i++ {
 		if nums[i] > nums[i+1] {
-			fmt.Println(nums[i], " ", nums[i+1])
+			return false
+		}
+	}
+
+	return true
+}
+
+func IsSortedDesc(nums []int) bool {
+	sz := len(nums)
+	if sz <= 2 {
+		return true
+	}
+
+	for i := 0; i < sz-1; i++ {
+		if nums[i] < nums[i+1] {
 			return false
 		}
 	}

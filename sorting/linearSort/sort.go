@@ -1,5 +1,14 @@
 package linearSort
 
+import (
+	"leetcode/leetcode/structure/heap"
+)
+
+// 排序的几个维度
+// 1. stable
+// 2. 时间复杂度
+// 3. inplace
+
 /*
 升序排列
 */
@@ -122,18 +131,17 @@ func __merge(nums []int, l, m, r int) {
 /**
 
  */
-func MergeSortBU()  {
+func MergeSortBU() {
 	// todo...
 }
 
-func QuickSortLLPtr()  {
+func QuickSortLLPtr() {
 	// todo...
 }
 
-func QuickSortLRPtr()  {
+func QuickSortLRPtr() {
 	// todo..
 }
-
 
 func QuickSort(nums []int) {
 	__quickSort(nums, 0, len(nums)-1)
@@ -178,46 +186,45 @@ func QuickSortThreeWays() {
 }
 
 // a lot of same values
-func CountingSort(nums []int)  {
+func CountingSort(nums []int) {
 
 }
 
-func __countingSort(nums []int, biggest, smallest int)  {
+func __countingSort(nums []int, biggest, smallest int) {
 
 }
 
-
-func RadixSortLSD(nums []int)  {
+func RadixSortLSD(nums []int) {
 	// todo...
 }
 
-func RadixSortMSD(nums []int)  {
+func RadixSortMSD(nums []int) {
 	// todo..
 }
 
 // val is dense dis
 // len(n) ≈ largest - smallest
-func PigeonholdSort(nums []int)  {
+func PigeonholdSort(nums []int) {
 	// todo.
 }
 
-func BucketSort(nums []int)  {
+func BucketSort(nums []int) {
 	// todo..
 }
 
-func StdSort(nums []int)  {
+func StdSort(nums []int) {
 	// todo
 }
 
-func StdStableSort(nums []int)  {
+func StdStableSort(nums []int) {
 	// todo
 }
 
-func ShellSort(nums []int)  {
+func ShellSort(nums []int) {
 	// todo
 }
 
-func CocktailShakerSort(nums []int)  {
+func CocktailShakerSort(nums []int) {
 	// todo..
 }
 
@@ -225,15 +232,63 @@ func GnomeSort(nums []int) {
 	// todo
 }
 
-func BitonicSort(nums []int)  {
+func BitonicSort(nums []int) {
 	// todo...
 }
 
-func BogoSort(nums []int)  {
-	
+func BogoSort(nums []int) {
+
 }
 
 // cocktail shaker sort && optimized bubble sort
-func ExchangeSort()  {
+func ExchangeSort() {
 	// todo..
 }
+
+func HeapSortHeapify(nums []int) error {
+	mh := heap.MinHeap{}
+	mh.Heapify(nums)
+	for i := 0; i < len(nums); i++ {
+		var err error
+		nums[i], err = mh.ExtractMin()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// 可以看到，不管是 heapSort1 还是 heapSort2， 都额外开辟了 n 个元素的空间, 实际上
+func HeapSortInsert(nums []int) error {
+	mh := heap.MinHeap{}
+	sz := len(nums)
+	for i := 0; i < sz; i++ {
+		mh.Insert(nums[i])
+	}
+
+	for i := 0; i < sz; i++ {
+		var err error
+		nums[i], err = mh.ExtractMin()
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func  HeapSort(nums []int) error {
+	mh := heap.MaxHeap{}
+	mh.Heapify(nums)
+	mh.SortAsc()
+	nums = mh.GetArr()
+	return nil
+}
+
+func  HeapSortDesc(nums []int) error {
+	mh := heap.MinHeap{}
+	mh.Heapify(nums)
+	mh.SortDesc()
+	nums = mh.GetArr()
+	return nil
+}
+

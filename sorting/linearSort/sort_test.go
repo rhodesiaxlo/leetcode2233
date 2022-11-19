@@ -53,3 +53,48 @@ func TestQuickSort(t *testing.T) {
 		t.Fatal("nearlly sorted array")
 	}
 }
+
+func TestHeapSortInsert(t *testing.T) {
+	nums := sorting.GenArrayDesc(1000000)
+	err := HeapSortInsert(nums)
+	if err != nil {
+		t.Fatal(" heap sort error occuring")
+	}
+	if !sorting.IsSorted(nums) {
+		t.Fatal("heap sort not working")
+	}
+}
+
+func TestHeapSortHeapify(t *testing.T) {
+	nums := sorting.GenArrayDesc(1000000)
+	err := HeapSortHeapify(nums)
+	if err != nil {
+		t.Fatal(" heap sort error occuring")
+	}
+	if !sorting.IsSorted(nums) {
+		t.Fatal("heap sort not working")
+	}
+}
+
+// heapSort1,heapsort2 都额外开辟了空间，实际上并不需要
+func TestHeapSort(t *testing.T) {
+	nums := sorting.GenArrayDesc(100)
+	err := HeapSort(nums)
+	if err != nil {
+		t.Fatal(" heap sort error occuring")
+	}
+	if !sorting.IsSorted(nums) {
+		t.Fatal("heap sort not working")
+	}
+}
+
+func TestHeapSortDesc(t *testing.T) {
+	nums := sorting.GenArrayDesc(1000000)
+	err := HeapSort(nums)
+	if err != nil {
+		t.Fatal(" heap sort error occuring")
+	}
+	if !sorting.IsSortedDesc(nums) {
+		t.Fatal("heap sort not working")
+	}
+}

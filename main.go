@@ -29,6 +29,19 @@ type Node struct {
 
 
 func main() {
+	nums1 := []int {1,2,3,4,5}
+	changeVal(nums1)
+	nums3 := []int {1,2,3,4,5} // !!! replace
+	changeValByAssign(nums3)
+
+	fmt.Println("nums1", nums1)
+	fmt.Println("nums3", nums3)
+	return
+
+	arr := []int {1,2,3,4,5,6}
+	arr2 := arr[:3]
+	fmt.Println(len(arr2))
+	return
 	nums := sorting.GenArray(10,0)
 	mh := heap.MaxHeap{}
 	mh.Heapify(nums)
@@ -500,4 +513,14 @@ func evalOrder()  {
 func forCond(n int) bool {
 	fmt.Println(n)
 	return n > 0
+}
+
+func changeVal(nums []int)  {
+	nums[0] = 1000
+}
+
+func changeValByAssign(nums []int)  {
+	nums1 := make([]int, len(nums))
+	copy(nums1, nums)
+	nums = nums1 // replace
 }
