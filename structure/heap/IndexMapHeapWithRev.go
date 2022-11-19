@@ -21,6 +21,16 @@ rev[index[i]] = i
 	m.rev[m.index[m.eleNum]] = 0 // 如何理解这段
 5. change
 */
+
+// 继续优化
+// todo ...
+// index 从0 开始
+// 使用 赋值代替 swap
+// 初始化容量，减少扩容带来的性能损耗
+// 不稳定如何解决呢
+// 最大最小队列
+// 二项堆
+// 斐波那契堆
 type IndexMaxHeapWithRev struct {
 	data   []Item
 	index  []int

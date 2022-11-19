@@ -79,7 +79,8 @@ func TestHeapSortHeapify(t *testing.T) {
 // heapSort1,heapsort2 都额外开辟了空间，实际上并不需要
 func TestHeapSort(t *testing.T) {
 	nums := sorting.GenArrayDesc(100)
-	err := HeapSort(nums)
+	var err error
+	nums, err = HeapSort(nums)
 	if err != nil {
 		t.Fatal(" heap sort error occuring")
 	}
@@ -90,11 +91,19 @@ func TestHeapSort(t *testing.T) {
 
 func TestHeapSortDesc(t *testing.T) {
 	nums := sorting.GenArrayDesc(1000000)
-	err := HeapSort(nums)
+	nums, err := HeapSortDesc(nums)
 	if err != nil {
 		t.Fatal(" heap sort error occuring")
 	}
 	if !sorting.IsSortedDesc(nums) {
 		t.Fatal("heap sort not working")
+	}
+}
+
+func TestQuickSort2(t *testing.T) {
+	nums := sorting.GenArrayDesc(1000000)
+	QuickSort(nums)
+	if !sorting.IsSorted(nums) {
+		t.Fatal("quick sort not working")
 	}
 }

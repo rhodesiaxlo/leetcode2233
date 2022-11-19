@@ -2,6 +2,7 @@ package linearSort
 
 import (
 	"leetcode/leetcode/structure/heap"
+	"math/rand"
 )
 
 // 排序的几个维度
@@ -10,6 +11,8 @@ import (
 // 3. inplace
 // 4. 是不是一定要先有序 heap
 // 5. 额外的空间 和 3 有点类似， 但是是定量分析
+
+// 重复元素， 是否近乎有序， 分布
 
 /*
 升序排列
@@ -62,7 +65,7 @@ func __insertSort2(nums []int, l, r int) {
 	for i := l + 1; i <= r; i++ {
 		tmp := nums[i]
 		j := i
-		for j = i; j > l && nums[j] < tmp; j-- {
+		for j = i; j > l && nums[j-1] > tmp; j-- {
 			nums[j] = nums[j-1]
 		}
 		// 找到第一个
@@ -155,6 +158,9 @@ func __quickSort(nums []int, l, r int) {
 		__insertSort2(nums, l, r)
 		return
 	}
+	//if l >= r {
+	//	return
+	//}
 
 	// partition
 	p := __partition(nums, l, r)
@@ -166,19 +172,22 @@ func __quickSort(nums []int, l, r int) {
 
 func __partition(nums []int, l, r int) int {
 	j := l
-	tmp := nums[l]
+
 	// 约定 (-infi, j) 的元素都小于 tmp
 	// 遍历数组, 如果发现有比 tmp 下的 放到 j 的位置 j++
 	// 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
-	//swap( nums[l] , nums[rand()%(r-l+1)+l] );
+	tmpIndex := rand.Intn(r-l+1) + l
+	nums[l], nums[tmpIndex] = nums[tmpIndex], nums[l]
+	tmp := nums[l]
 	for i := l + 1; i <= r; i++ {
 		if nums[i] < tmp {
-			nums[j] = nums[i]
+			// swap
 			j++
+			nums[j], nums[i] = nums[i], nums[j]
 		}
 	}
 
-	nums[j] = tmp
+	nums[l], nums[j] = nums[j], nums[l]
 
 	return j
 }
@@ -281,19 +290,17 @@ func HeapSortInsert(nums []int) error {
 	return nil
 }
 
-func  HeapSort(nums []int) error {
+func HeapSort(nums []int) ([]int, error) {
 	mh := heap.MaxHeap{}
 	mh.Heapify(nums)
 	mh.SortAsc()
-	nums = mh.GetArr()
-	return nil
+	return mh.GetArr(), nil
 }
 
-func  HeapSortDesc(nums []int) error {
+func HeapSortDesc(nums []int) ([]int, error) {
 	mh := heap.MinHeap{}
 	mh.Heapify(nums)
 	mh.SortDesc()
 	nums = mh.GetArr()
-	return nil
+	return nums, nil
 }
-
