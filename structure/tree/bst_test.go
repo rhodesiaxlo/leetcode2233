@@ -221,3 +221,16 @@ func TestHibardDeletion(t *testing.T) {
 		t.Fatal("size function not working")
 	}
 }
+
+/**
+bst 顺序插入在10k 的数据规模下性能很低
+ */
+func TestBstInsertByOrder(t *testing.T) {
+	// todo
+	// communist.txt
+}
+
+func TestTrieVsBst(t *testing.T) {
+	// todo
+	// bible.txt
+}

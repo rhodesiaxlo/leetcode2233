@@ -37,7 +37,7 @@ basic operation
 6. delete // 最难的操作
 7. minimum maximum
 8. removeMin, removeMax
-9. hi
+9. hibbard deletetion
 
 		41
 		   \
@@ -61,6 +61,16 @@ s = min(d->r)
 s->l = d->l
 s->r = delMin(d->r)
 
+10. successor predecessor
+11. floor, ceil， 区分一下 successor / predecessor 和 floor /ceil 的区别
+12. rank
+13. 重复元素的构建
+14. bst 同样的数据的分布不一定完全相同， 导致了， bst 在极端情况下可以编程链表 -----balanced tree
+15. 发散  归并排序好像是一个树的后序遍历
+16. 应用 8 数码 ， decesion tree
+        8 皇后
+		数独
+		搬运工
 */
 
 type Bst struct {
@@ -330,3 +340,35 @@ func (b *Bst) removeNode(root *BstNode, k string) *BstNode {
 	}
 	return root
 }
+
+func (b *Bst) Successor(k string) *BstNode {
+	// todo
+	return nil
+}
+
+func (b *Bst) Precedessor(k string) *BstNode  {
+	// todo
+	return nil
+}
+
+func (b *Bst) Floor(k string) *BstNode {
+	// todo
+	return nil
+}
+
+func (b *Bst) Ceil(k string) *BstNode {
+	// todo
+	return nil
+}
+
+func (b *Bst) Rank(k string) *BstNode {
+	// todo
+	return nil
+}
+
+func (b *Bst) Select(k string) *BstNode {
+	// todo
+	return nil
+}
+
+
