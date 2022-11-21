@@ -32,6 +32,15 @@ type Node struct {
 }
 
 func main() {
+	//fmt.Println(nil == nil)
+	//return
+
+	x100 := []int(nil)
+	//x1 := []int{}
+	x100  = append(x100, 1)
+	fmt.Println(x100)
+	return
+
 	bst3 := tree.NewBst()
 	bst3.Insert("20", 20)
 	bst3.Insert("10", 10)
