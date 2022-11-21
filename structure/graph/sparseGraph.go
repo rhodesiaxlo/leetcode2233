@@ -2,6 +2,7 @@ package graph
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -102,17 +103,28 @@ func (d *SparseGraph) addEdge(i, j int) {
 	//}
 
 	d.g[i] = append(d.g[i], j)
-	if i!= j && !d.isDirectd { // 1. 同时排除了自环边 self-loop,
+	if i != j && !d.isDirectd { // 1. 同时排除了自环边 self-loop,
 		d.g[j] = append(d.g[j], i)
 	}
 	d.e++
 }
 func (d *SparseGraph) hasEdge(i, j int) bool {
 	// 对于 adjacency list 为了判断是否有这条边，只能遍历，性能很低
-	for k:=0;k < len(d.g[i]);k++ {
+	for k := 0; k < len(d.g[i]); k++ {
 		if d.g[i][k] == j {
 			return true
 		}
 	}
 	return false
+}
+
+func (d *SparseGraph) show() {
+	for i := 0; i < d.V(); i++ {
+		fmt.Print(i, ": ")
+		tmpIter := NewSparseGraphIterator(d, i)
+		for v := tmpIter.begin(); !tmpIter.end(); v = tmpIter.next() {
+			fmt.Print(v, " ")
+		}
+		fmt.Println("")
+	}
 }

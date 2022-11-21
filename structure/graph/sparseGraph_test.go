@@ -92,3 +92,9 @@ func TestIterUsingIterator(t *testing.T) {
 		fmt.Println("")
 	}
 }
+
+func Test2(t *testing.T) {
+	sg, _ := NewSparseGraphFromFile("../../testG1.txt")
+	sg.show()
+}
+

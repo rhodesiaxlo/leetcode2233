@@ -91,3 +91,8 @@ func TestIterDenseUsingIterator(t *testing.T) {
 		fmt.Println("")
 	}
 }
+
+func TestIter2(t *testing.T) {
+	dg, _ := NewDenseGraphFromFile("../../testG1.txt")
+	dg.show()
+}
