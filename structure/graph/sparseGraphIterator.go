@@ -6,10 +6,10 @@ type SparseGraphIterator struct {
 	index int
 }
 
-func NewSparseGraphIterator(sg *SparseGraph, i int) *SparseGraphIterator {
+func NewSparseGraphIterator(sg *SparseGraph, iterFrom int) *SparseGraphIterator {
 	return &SparseGraphIterator{
 		sg:    sg,
-		v:     i,
+		v:     iterFrom,
 		index: 0,
 	}
 }

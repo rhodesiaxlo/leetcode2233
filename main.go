@@ -32,6 +32,8 @@ type Node struct {
 }
 
 func main() {
+	printNonCompleteTree()
+	return
 	//fmt.Println(nil == nil)
 	//return
 
@@ -588,4 +590,61 @@ func changeValByAssign(nums []int) {
 	nums1 := make([]int, len(nums))
 	copy(nums1, nums)
 	nums = nums1 // replace
+}
+
+func printNonCompleteTree() {
+	root := &tree.TreeNode{
+		K: "0",
+		V: 0,
+		L: nil,
+		R: nil,
+	}
+
+	level1l1 := &tree.TreeNode{
+		K: "1",
+		V: 1,
+		L: nil,
+		R: nil,
+	}
+
+	level1r1 := &tree.TreeNode{
+		K: "2",
+		V: 2,
+		L: nil,
+		R: nil,
+	}
+
+	root.L = level1l1
+	root.R = level1r1
+
+	level2L1 := &tree.TreeNode{
+		K: "3",
+		V: 3,
+		L: nil,
+		R: nil,
+	}
+	level2r1 := &tree.TreeNode{
+		K: "4",
+		V: 4,
+		L: nil,
+		R: nil,
+	}
+	level2r2 := &tree.TreeNode{
+		K: "5",
+		V: 5,
+		L: nil,
+		R: nil,
+	}
+	level1l1.L = level2L1
+	level1r1.L = level2r1
+	level1r1.R = level2r2
+	level3r1 := &tree.TreeNode{
+		K: "6",
+		V: 6,
+		L: nil,
+		R: nil,
+	}
+	level2r2.L = level3r1
+
+	structure.PrintNonCompleteTree(root)
 }

@@ -14,7 +14,11 @@ import (
 1. 建立模型
 2. 建立连接
 3. 遍历
-4. 其它算法
+4. 其它算法（联通分量、是否相连)
+5. path  hasPath,path,showPath
+6. dfs  检查环 todo
+7. bfs
+
 */
 type DenseGraph struct {
 	v, e      int
@@ -40,7 +44,6 @@ func NewDenseGraphFromFile(path string) (DenseGraph,error) {
 		return DenseGraph{}, err
 	}
 
-	edge := [][2]int(nil)
 	nVer, nEdge := 0, 0
 	dg := DenseGraph{}
 	scanner := bufio.NewScanner(file)
@@ -61,9 +64,6 @@ func NewDenseGraphFromFile(path string) (DenseGraph,error) {
 		return DenseGraph{}, nil
 	}
 
-	for _, v := range edge {
-		dg.addEdge(v[0], v[1])
-	}
 	return dg, nil
 }
 

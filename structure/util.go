@@ -59,6 +59,67 @@ func _div(nums []int, level int) ([][]string, int) {
 	return arr, maxWidth
 }
 
-func PrintNonCompleteTree(node *tree.BstNode) {
-	// todo ..
+
+func dive(nodes []*tree.TreeNode, level int) ([][]string, int) {
+	count := len(nodes)
+	nextLevelExists := false
+
+	// Find if there is another level
+	// and construct next level filling up missing nodes as `nil`
+	for i := 0; i < count; i++ {
+		node := nodes[i]
+		if node == nil {
+			nodes = append(nodes, nil, nil)
+		} else {
+			nodes = append(nodes, node.L, node.R)
+		}
+
+		nextLevelExists = nextLevelExists || (node != nil && (node.L != nil || node.R != nil))
+	}
+
+	// Initialize array if we got to the bottom of the tree
+	// otherwise, retrieve array from another recursive call
+	var arr [][]string
+	var width int
+	if nextLevelExists {
+		arr, width = dive(nodes[count:], level + 1)
+	} else {
+		arr = make([][]string, level + 1)
+		width = 2 * count - 1
+	}
+
+	arr[level] = make([]string, width)
+	elementWidth := (width - count + 1) / count
+
+	// Processing current level place node.Val value into correct position in array
+	for i, j := 0, 0; i < count; i++ {
+		mid := elementWidth / 2 + 1
+
+		if nodes[i] != nil {
+			arr[level][j + mid - 1] = strconv.Itoa(nodes[i].V)
+		}
+		j += elementWidth + 1
+	}
+	return arr, width
+}
+
+func getArrForNonCompleteTree(root *tree.TreeNode) [][]string {
+	arr, _ := dive([]*tree.TreeNode{root}, 0)
+	return arr
+}
+
+func PrintNonCompleteTree(root *tree.TreeNode)  {
+	arr := getArrForNonCompleteTree(root)
+	for _, v := range arr {
+		tmp := strings.Builder{}
+		for _, v2 := range v {
+			if v2 == "" {
+				tmp.WriteString(" ")
+			} else {
+				tmp.WriteString(v2)
+			}
+		}
+		fmt.Println(tmp.String())
+	}
+	//fmt.Println(arr)
 }

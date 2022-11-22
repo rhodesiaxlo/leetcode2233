@@ -55,7 +55,6 @@ func NewSparseGraphFromFile(path string) (SparseGraph, error) {
 		return SparseGraph{}, err
 	}
 
-	edge := [][2]int(nil)
 	nVer, nEdge := 0, 0
 	sg := SparseGraph{}
 	scanner := bufio.NewScanner(file)
@@ -76,9 +75,6 @@ func NewSparseGraphFromFile(path string) (SparseGraph, error) {
 		return SparseGraph{}, nil
 	}
 
-	for _, v := range edge {
-		sg.addEdge(v[0], v[1])
-	}
 	return sg, nil
 }
 
