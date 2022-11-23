@@ -6,6 +6,13 @@ type iIterator interface {
 	next() int
 }
 
+
+type iWtIterator interface {
+	begin() *edge
+	end() bool
+	next() *edge
+}
+
 func NewIterator(g interface{}, v int) iIterator {
 	switch g.(type) {
 	case *SparseGraph:
@@ -18,3 +25,18 @@ func NewIterator(g interface{}, v int) iIterator {
 		return nil
 	}
 }
+
+func NewWtIterator(g interface{}, v int) iWtIterator {
+	switch g.(type) {
+	case *WtSparseGraph:
+		wtsgPtr := g.(*WtSparseGraph)
+		return NewWtSparseGraphIterator(wtsgPtr, v)
+	case *WtDenseGraph:
+		wtdgPtr := g.(*WtDenseGraph)
+		return NewWtDenseGraphIterator(wtdgPtr, v)
+	default:
+		return nil
+	}
+}
+
+
