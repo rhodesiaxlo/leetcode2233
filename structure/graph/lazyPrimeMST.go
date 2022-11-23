@@ -19,7 +19,7 @@ type LazyPrimeMST struct {
 func newLazyPrimeMst(g interface{}, v int) LazyPrimeMST {
 	mst := LazyPrimeMST{
 		g:      g,
-		pq:     MinHeapEdge{},
+		pq:     NewMinHeapEdge(v*10),
 		marked: nil,
 		v:      v,
 	}
@@ -39,12 +39,13 @@ func (l *LazyPrimeMST) Init() {
 	for !l.pq.Empty() {
 		tmpMin, _ := l.pq.ExtractMin()
 		//for l.marked[tmpMin.v] && l.marked[tmpMin.w] {
-		if l.marked[tmpMin.v] == l.marked[tmpMin.w] {
+		if l.marked[tmpMin.v] == l.marked[tmpMin.w] {  // 相对关系比绝对关系更有效
 			//tmpMin, _ = l.pq.ExtractMin()
 			continue
 		}
 
 		l.ans = append(l.ans, tmpMin)
+
 		l.mstWt += tmpMin.wt
 		if !l.marked[tmpMin.v] {
 			l.Visit(tmpMin.v)

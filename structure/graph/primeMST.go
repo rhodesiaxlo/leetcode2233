@@ -66,20 +66,20 @@ func (p *PrimeMST) Visit(i int) {
 	// 避免成环
 	if !p.marked[i] {
 		p.marked[i] = true
-	}
 
-	iter := NewWtIterator(p.g, i)
-	for v := iter.begin(); !iter.end(); v = iter.next() {
-		// 如果没有加入到横切边的数组中
-		otherV, _ := v.Other(i)
+		iter := NewWtIterator(p.g, i)
+		for v := iter.begin(); !iter.end(); v = iter.next() {
+			// 如果没有加入到横切边的数组中
+			otherV, _ := v.Other(i)
 
-		if !p.marked[otherV] { // 避免成环
-			if p.toEdge[otherV] == nil {
-				p.toEdge[otherV] = v
-				p.ipq.Insert(otherV, v) // 原来的数字是0开始排列的， 且数字内容和序号是重合的， 进入 ipq 后， 需要从1开始排，最小为1
-			} else if p.toEdge[otherV].wt > v.wt {
-				p.toEdge[otherV] = v
-				p.ipq.Change(otherV, v)
+			if !p.marked[otherV] { // 避免成环
+				if p.toEdge[otherV] == nil {
+					p.toEdge[otherV] = v
+					p.ipq.Insert(otherV, v) // 原来的数字是0开始排列的， 且数字内容和序号是重合的， 进入 ipq 后， 需要从1开始排，最小为1
+				} else if p.toEdge[otherV].wt > v.wt {
+					p.toEdge[otherV] = v
+					p.ipq.Change(otherV, v)
+				}
 			}
 		}
 	}

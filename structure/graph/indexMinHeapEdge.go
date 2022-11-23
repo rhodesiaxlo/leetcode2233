@@ -91,12 +91,8 @@ func (m *IndexMixHeapEdge) ExtractMinIndex() (int, error) {
 	}
 	//min := m.data[m.index[1]]
 	tmpMinIndex := m.index[1] // 数据的索引是应该不为空的
-	if m.data[tmpMinIndex] == nil {
-		fmt.Print("some thing wrong")
-	}
 	m.index[1], m.index[m.eleNum] = m.index[m.eleNum], m.index[1]
 	m.eleNum -= 1
-	//m.index = append([]int(nil), m.index[:m.eleNum+1]...)
 	m.shiftDown(1, m.eleNum)
 	return tmpMinIndex - 1, nil
 }

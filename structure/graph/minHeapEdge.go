@@ -9,6 +9,16 @@ type MinHeapEdge struct {
 	eleNum int
 }
 
+func NewMinHeapEdge(cap int) MinHeapEdge {
+	mhp := MinHeapEdge{
+		arr:    nil,
+		eleNum: 0,
+	}
+
+	mhp.arr = make([]*edge, cap+1)
+	return mhp
+}
+
 // 插入的效率没有原地排序效率高
 func NewMinHeapEdgeByInsert(nums []*edge) MinHeapEdge {
 	pq := MinHeapEdge{}
@@ -40,10 +50,14 @@ func (m *MinHeapEdge) Insert(x *edge) {
 		m.arr = append(m.arr, nil)
 	}
 
-	m.arr = append(m.arr, x)// 因为最后一个元素
-	m.eleNum += 1
+	//m.arr = append(m.arr, x) // 因为最后一个元素
+	//m.eleNum += 1
+	m.arr[m.eleNum+1] = x
+	m.eleNum++
 
-	m.shiftUp(len(m.arr) - 1)
+	//m.shiftUp(len(m.arr) - 1) // 定义完整的重要性
+	m.shiftUp(m.eleNum)
+
 }
 
 func (m *MinHeapEdge) Min() *edge {
@@ -64,7 +78,7 @@ func (m *MinHeapEdge) ExtractMin() (*edge, error) {
 	min := m.arr[1]
 	m.arr[1], m.arr[m.eleNum] = m.arr[m.eleNum], m.arr[1]
 	m.eleNum -= 1
-	m.arr = append([]*edge(nil), m.arr[:m.eleNum+1]...) // 还是删除比较好
+	//m.arr = append([]*edge(nil), m.arr[:m.eleNum+1]...) // 还是删除比较好
 	m.shiftDown(1, m.eleNum)
 	return min, nil
 }
