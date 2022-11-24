@@ -6,14 +6,14 @@ import (
 )
 
 func TestPrimeMST_Init(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG4")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG4", false)
 	mst := NewPrimeMst(&wtsg, wtsg.v)
 	mst.Show()
 	fmt.Println(mst.mstWt)
 }
 
 func TestLazyPrimeMST_Init(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG4")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG4", false)
 	mst := newLazyPrimeMst(&wtsg, wtsg.v)
 	mst.Show()
 	fmt.Println(mst.mstWt)
@@ -21,24 +21,24 @@ func TestLazyPrimeMST_Init(t *testing.T) {
 
 
 func TestPer5ByLazyPrime(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG5")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG5", false)
 	mst := newLazyPrimeMst(&wtsg, wtsg.v)
 	//mst.Show()
 	fmt.Println(mst.mstWt)
 }
 
 func TestPer5ByPrime(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG5")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG5", false)
 	mst:=NewPrimeMst(&wtsg, wtsg.v)
 	//mst.Show()
 	fmt.Println(mst.mstWt)
 }
 
 func TestLazyPrimePrimeEqual5(t *testing.T) {
-	wtsg1, _ := NewWtSparseGraphFromFile("../../testG5")
+	wtsg1, _ := NewWtSparseGraphFromFile("../../testG5", false)
 	mst1 := newLazyPrimeMst(&wtsg1, wtsg1.v)
 
-	wtsg2, _ := NewWtSparseGraphFromFile("../../testG5")
+	wtsg2, _ := NewWtSparseGraphFromFile("../../testG5", false)
 	mst2:=NewPrimeMst(&wtsg2, wtsg2.v)
 
 	if mst1.mstWt != mst2.mstWt {
@@ -47,7 +47,7 @@ func TestLazyPrimePrimeEqual5(t *testing.T) {
 }
 
 func TestPerByLazyPrime6(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG6")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG6", false)
 	mst := newLazyPrimeMst(&wtsg, wtsg.v)
 	//mst.Show()
 	fmt.Println(mst.mstWt)
@@ -56,7 +56,7 @@ func TestPerByLazyPrime6(t *testing.T) {
 // 为什么速度会差这么多 ？？？？？
 // todo  一个 8 s 一个 0.05 s
 func TestPerByPrime6(t *testing.T) {
-	wtsg, _ := NewWtSparseGraphFromFile("../../testG6")
+	wtsg, _ := NewWtSparseGraphFromFile("../../testG6", false)
 	mst:=NewPrimeMst(&wtsg, wtsg.v)
 	//mst.Show()
 	fmt.Println(mst.mstWt)

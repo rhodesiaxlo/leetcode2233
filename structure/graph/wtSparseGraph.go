@@ -31,7 +31,7 @@ func (d *WtSparseGraph) init() {
 	d.g = make([][]*edge, d.v)
 }
 
-func NewWtSparseGraphFromFile(path string) (WtSparseGraph, error) {
+func NewWtSparseGraphFromFile(path string, directed bool) (WtSparseGraph, error) {
 	file, err := os.Open(path)
 	defer file.Close()
 	if err != nil {
@@ -40,6 +40,7 @@ func NewWtSparseGraphFromFile(path string) (WtSparseGraph, error) {
 
 	nVer, nEdge := 0, 0
 	sg := WtSparseGraph{}
+	sg.isDirectd = directed
 	scanner := bufio.NewScanner(file)
 	totalEdge :=0
 	for scanner.Scan() {
@@ -54,7 +55,7 @@ func NewWtSparseGraphFromFile(path string) (WtSparseGraph, error) {
 			nVer = l
 			//nEdge = r
 			totalEdge = r
-			sg = NewWtSparseGraph(nVer, nEdge, false)
+			sg = NewWtSparseGraph(nVer, nEdge, true)
 			continue
 		}
 		sg.addEdge(l, r, wt)
@@ -104,13 +105,22 @@ func (d *WtSparseGraph) addEdge(i, j int, wt float64) {
 	d.e++
 }
 func (d *WtSparseGraph) hasEdge(i, j int) bool {
-	for k := 0; k < len(d.g[i]); k++ {
-		tmpOther, _ := d.g[i][k].Other(i)
-		if tmpOther == j {
-			return true
+	if d.isDirectd {
+		for k := 0; k < len(d.g[i]); k++ {
+			if d.g[i][k].V() == i && d.g[i][k].W() == j {
+				return true
+			}
 		}
+		return false
+	} else {
+		for k := 0; k < len(d.g[i]); k++ {
+			tmpOther, _ := d.g[i][k].Other(i)
+			if tmpOther == j {
+				return true
+			}
+		}
+		return false
 	}
-	return false
 }
 
 func (d *WtSparseGraph) removeEdge(i, j int, both bool)  {
